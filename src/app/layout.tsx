@@ -10,7 +10,7 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: "qanx._.minhhh blog",
-  description: "for my own and somebody",
+  description: "\"just raw !\"",
 };
 
 export default function RootLayout({
