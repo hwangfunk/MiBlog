@@ -19,7 +19,9 @@ export async function loginAction(formData: FormData) {
   await createSession();
 
   const from = formData.get("from") as string;
-  redirect(from || "/admin");
+  // Only allow internal redirects to prevent open redirect attacks
+  const safeFrom = from && from.startsWith("/") && !from.startsWith("//") ? from : "/admin";
+  redirect(safeFrom);
 }
 
 export async function logoutAction() {

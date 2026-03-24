@@ -1,60 +1,23 @@
-"use client";
-
-import { motion, HTMLMotionProps } from "framer-motion";
-
-interface FadeInStaggerProps extends HTMLMotionProps<"div"> {
-  children: React.ReactNode;
-  staggerDelay?: number;
-  initialY?: number;
-  duration?: number;
-}
-
 export const FadeInStagger = ({
   children,
-  staggerDelay = 0.1,
-  initialY = 15,
-  duration = 0.4,
+  className,
   ...props
-}: FadeInStaggerProps) => {
+}: React.HTMLAttributes<HTMLDivElement>) => {
   return (
-    <motion.div
-      initial="hidden"
-      animate="visible"
-      variants={{
-        hidden: {},
-        visible: {
-          transition: {
-            staggerChildren: staggerDelay,
-          },
-        },
-      }}
-      {...props}
-    >
+    <div className={`stagger-children ${className ?? ""}`} {...props}>
       {children}
-    </motion.div>
+    </div>
   );
 };
 
 export const FadeInStaggerItem = ({
   children,
+  className,
   ...props
-}: HTMLMotionProps<"div">) => {
+}: React.HTMLAttributes<HTMLDivElement>) => {
   return (
-    <motion.div
-      variants={{
-        hidden: { opacity: 0, y: 15 },
-        visible: {
-          opacity: 1,
-          y: 0,
-          transition: {
-            duration: 0.4,
-            ease: "easeOut",
-          },
-        },
-      }}
-      {...props}
-    >
+    <div className={className} {...props}>
       {children}
-    </motion.div>
+    </div>
   );
 };

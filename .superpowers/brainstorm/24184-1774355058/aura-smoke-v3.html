@@ -1,0 +1,328 @@
+<h2>Admin Aura — Làn khói neon xanh ngọc</h2>
+<p class="subtitle">Dùng màu xanh ngọc để thấy rõ hiệu ứng. Sẽ chỉnh màu sau. Click phương án bạn thích.</p>
+
+<div class="cards">
+  <!-- Option A: Smoke Breath -->
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image" style="height:300px;position:relative;overflow:hidden;background:#000;border-radius:8px;">
+      <div class="aura-a">
+        <!-- Top edge smoke -->
+        <div class="smoke-a s-top-1"></div>
+        <div class="smoke-a s-top-2"></div>
+        <!-- Bottom edge smoke -->
+        <div class="smoke-a s-bottom-1"></div>
+        <div class="smoke-a s-bottom-2"></div>
+        <!-- Left edge smoke -->
+        <div class="smoke-a s-left-1"></div>
+        <div class="smoke-a s-left-2"></div>
+        <!-- Right edge smoke -->
+        <div class="smoke-a s-right-1"></div>
+        <div class="smoke-a s-right-2"></div>
+      </div>
+      <div class="mock-content-inner">
+        <div class="mock-header"><span class="mock-title">Admin</span><span class="mock-link">← View site</span></div>
+        <div class="mock-subtitle">Your posts (3)</div>
+        <div class="mock-row">Hello World</div>
+        <div class="mock-row">My First Post</div>
+        <div class="mock-row">About Me</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Smoke Breath</h3>
+      <p>Nhiều lớp khói mỏng lan tỏa từ 4 cạnh, mỗi lớp thở riêng lệch nhịp. Tạo cảm giác sống động, hơi thở quyền năng.</p>
+    </div>
+  </div>
+
+  <!-- Option B: Flowing Mist -->
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image" style="height:300px;position:relative;overflow:hidden;background:#000;border-radius:8px;">
+      <div class="aura-b">
+        <div class="mist-b mist-1"></div>
+        <div class="mist-b mist-2"></div>
+        <div class="mist-b mist-3"></div>
+        <div class="mist-b mist-4"></div>
+      </div>
+      <div class="mock-content-inner">
+        <div class="mock-header"><span class="mock-title">Admin</span><span class="mock-link">← View site</span></div>
+        <div class="mock-subtitle">Your posts (3)</div>
+        <div class="mock-row">Hello World</div>
+        <div class="mock-row">My First Post</div>
+        <div class="mock-row">About Me</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Flowing Mist</h3>
+      <p>Sương mù chảy liên tục dọc viền, di chuyển chậm rãi. Như dòng năng lượng lỏng bao quanh.</p>
+    </div>
+  </div>
+
+  <!-- Option C: Aura Waves -->
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image" style="height:300px;position:relative;overflow:hidden;background:#000;border-radius:8px;">
+      <div class="aura-c">
+        <div class="wave-c wave-c-1"></div>
+        <div class="wave-c wave-c-2"></div>
+        <div class="wave-c wave-c-3"></div>
+      </div>
+      <div class="mock-content-inner">
+        <div class="mock-header"><span class="mock-title">Admin</span><span class="mock-link">← View site</span></div>
+        <div class="mock-subtitle">Your posts (3)</div>
+        <div class="mock-row">Hello World</div>
+        <div class="mock-row">My First Post</div>
+        <div class="mock-row">About Me</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Aura Waves</h3>
+      <p>Sóng aura phát ra từ viền, lan tỏa rồi tan biến, lặp lại liên tục. Như trường năng lượng đang rung động.</p>
+    </div>
+  </div>
+</div>
+
+<style>
+/* Shared mock content styles */
+.mock-content-inner {
+  padding: 30px 20px;
+  position: relative;
+  z-index: 1;
+}
+.mock-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.mock-title { color: #d4d4d4; font-weight: 500; font-size: 14px; font-family: monospace; }
+.mock-link { color: #525252; font-size: 11px; font-family: monospace; }
+.mock-subtitle { color: #737373; font-size: 12px; margin-bottom: 10px; font-family: monospace; }
+.mock-row {
+  background: #0a0a0a;
+  border: 1px solid #1a1a1a;
+  border-radius: 4px;
+  padding: 8px 12px;
+  margin-bottom: 6px;
+  color: #888;
+  font-size: 11px;
+  font-family: monospace;
+}
+
+/* ===== A — Smoke Breath ===== */
+.aura-a {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.smoke-a {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(20px);
+  background: radial-gradient(circle, rgba(0,210,200,0.35) 0%, rgba(0,210,200,0.1) 40%, transparent 70%);
+}
+
+/* Top edge */
+.s-top-1 {
+  width: 120px; height: 50px;
+  top: -15px; left: 20%;
+  animation: smoke-float-a 4s ease-in-out infinite;
+}
+.s-top-2 {
+  width: 150px; height: 55px;
+  top: -18px; left: 55%;
+  animation: smoke-float-a 5s ease-in-out infinite 1.5s;
+}
+
+/* Bottom edge */
+.s-bottom-1 {
+  width: 140px; height: 50px;
+  bottom: -15px; left: 30%;
+  animation: smoke-float-a 4.5s ease-in-out infinite 0.8s;
+}
+.s-bottom-2 {
+  width: 110px; height: 45px;
+  bottom: -12px; left: 65%;
+  animation: smoke-float-a 5.5s ease-in-out infinite 2.5s;
+}
+
+/* Left edge */
+.s-left-1 {
+  width: 50px; height: 120px;
+  left: -15px; top: 20%;
+  animation: smoke-float-a 4.8s ease-in-out infinite 0.5s;
+}
+.s-left-2 {
+  width: 55px; height: 100px;
+  left: -18px; top: 60%;
+  animation: smoke-float-a 5.2s ease-in-out infinite 2s;
+}
+
+/* Right edge */
+.s-right-1 {
+  width: 50px; height: 110px;
+  right: -15px; top: 25%;
+  animation: smoke-float-a 4.3s ease-in-out infinite 1s;
+}
+.s-right-2 {
+  width: 55px; height: 130px;
+  right: -18px; top: 55%;
+  animation: smoke-float-a 5s ease-in-out infinite 3s;
+}
+
+@keyframes smoke-float-a {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(0.85) translateY(0px);
+    filter: blur(18px);
+  }
+  30% {
+    opacity: 0.9;
+    transform: scale(1.15) translateY(-3px);
+    filter: blur(25px);
+  }
+  70% {
+    opacity: 0.6;
+    transform: scale(1.05) translateY(2px);
+    filter: blur(22px);
+  }
+}
+
+/* ===== B — Flowing Mist ===== */
+.aura-b {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.mist-b {
+  position: absolute;
+  filter: blur(25px);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,210,200,0.4) 0%, rgba(0,210,200,0.08) 50%, transparent 70%);
+}
+
+.mist-1 {
+  width: 100px; height: 100px;
+  animation: mist-flow-h 8s ease-in-out infinite;
+  top: -20px;
+}
+.mist-2 {
+  width: 90px; height: 90px;
+  animation: mist-flow-h 8s ease-in-out infinite 2s;
+  bottom: -20px;
+}
+.mist-3 {
+  width: 90px; height: 90px;
+  animation: mist-flow-v 8s ease-in-out infinite 1s;
+  left: -20px;
+}
+.mist-4 {
+  width: 100px; height: 100px;
+  animation: mist-flow-v 8s ease-in-out infinite 3s;
+  right: -20px;
+}
+
+@keyframes mist-flow-h {
+  0% {
+    left: -10%;
+    opacity: 0.2;
+    transform: scale(0.8);
+  }
+  25% {
+    opacity: 0.8;
+    transform: scale(1.2);
+  }
+  50% {
+    left: 80%;
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  75% {
+    opacity: 0.9;
+    transform: scale(1.3);
+  }
+  100% {
+    left: -10%;
+    opacity: 0.2;
+    transform: scale(0.8);
+  }
+}
+
+@keyframes mist-flow-v {
+  0% {
+    top: -10%;
+    opacity: 0.2;
+    transform: scale(0.8);
+  }
+  25% {
+    opacity: 0.8;
+    transform: scale(1.2);
+  }
+  50% {
+    top: 80%;
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  75% {
+    opacity: 0.9;
+    transform: scale(1.3);
+  }
+  100% {
+    top: -10%;
+    opacity: 0.2;
+    transform: scale(0.8);
+  }
+}
+
+/* ===== C — Aura Waves ===== */
+.aura-c {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.wave-c {
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  border: 1.5px solid rgba(0,210,200,0.3);
+  box-shadow:
+    0 0 15px rgba(0,210,200,0.15),
+    inset 0 0 15px rgba(0,210,200,0.08);
+}
+
+.wave-c-1 {
+  animation: aura-pulse-c 4s ease-in-out infinite;
+}
+.wave-c-2 {
+  animation: aura-pulse-c 4s ease-in-out infinite 1.3s;
+}
+.wave-c-3 {
+  animation: aura-pulse-c 4s ease-in-out infinite 2.6s;
+}
+
+@keyframes aura-pulse-c {
+  0% {
+    opacity: 0;
+    transform: scale(0.98);
+    filter: blur(0px);
+  }
+  30% {
+    opacity: 0.8;
+    transform: scale(1);
+    filter: blur(2px);
+  }
+  60% {
+    opacity: 0.4;
+    transform: scale(1.02);
+    filter: blur(6px);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.05);
+    filter: blur(12px);
+  }
+}
+</style>

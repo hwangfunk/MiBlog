@@ -1,0 +1,239 @@
+<h2>Admin Aura — Làn khói quyền năng</h2>
+<p class="subtitle">Hiệu ứng khói mờ ảo, gam tối, tinh tế. Click phương án bạn thích.</p>
+
+<div class="cards">
+  <!-- Option A: Dark smoke pulse -->
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image" style="height:280px;position:relative;overflow:hidden;background:#000;border-radius:8px;">
+      <!-- Smoke aura edges -->
+      <div class="smoke-container-a">
+        <div class="smoke-edge smoke-top-a"></div>
+        <div class="smoke-edge smoke-right-a"></div>
+        <div class="smoke-edge smoke-bottom-a"></div>
+        <div class="smoke-edge smoke-left-a"></div>
+      </div>
+      <!-- Mock admin content -->
+      <div style="padding:30px 20px;position:relative;z-index:1;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+          <span style="color:#d4d4d4;font-weight:500;font-size:14px;font-family:monospace;">Admin</span>
+          <span style="color:#525252;font-size:11px;font-family:monospace;">← View site</span>
+        </div>
+        <div style="color:#737373;font-size:12px;margin-bottom:10px;font-family:monospace;">Your posts (3)</div>
+        <div style="background:#0a0a0a;border:1px solid #1a1a1a;border-radius:4px;padding:8px 12px;margin-bottom:6px;color:#888;font-size:11px;font-family:monospace;">Hello World</div>
+        <div style="background:#0a0a0a;border:1px solid #1a1a1a;border-radius:4px;padding:8px 12px;margin-bottom:6px;color:#888;font-size:11px;font-family:monospace;">My First Post</div>
+        <div style="background:#0a0a0a;border:1px solid #1a1a1a;border-radius:4px;padding:8px 12px;color:#888;font-size:11px;font-family:monospace;">About Me</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Dark Smoke Pulse</h3>
+      <p>Làn khói tối lan tỏa từ 4 cạnh, nhịp thở chậm rãi. Sử dụng gam neutral/zinc rất tối — gần như vô hình nhưng vẫn cảm nhận được sự hiện diện.</p>
+    </div>
+  </div>
+
+  <!-- Option B: Ember Smoke -->
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image" style="height:280px;position:relative;overflow:hidden;background:#000;border-radius:8px;">
+      <div class="smoke-container-b">
+        <div class="smoke-edge smoke-top-b"></div>
+        <div class="smoke-edge smoke-right-b"></div>
+        <div class="smoke-edge smoke-bottom-b"></div>
+        <div class="smoke-edge smoke-left-b"></div>
+        <!-- Corner accents -->
+        <div class="smoke-corner corner-tl-b"></div>
+        <div class="smoke-corner corner-tr-b"></div>
+        <div class="smoke-corner corner-bl-b"></div>
+        <div class="smoke-corner corner-br-b"></div>
+      </div>
+      <div style="padding:30px 20px;position:relative;z-index:1;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+          <span style="color:#d4d4d4;font-weight:500;font-size:14px;font-family:monospace;">Admin</span>
+          <span style="color:#525252;font-size:11px;font-family:monospace;">← View site</span>
+        </div>
+        <div style="color:#737373;font-size:12px;margin-bottom:10px;font-family:monospace;">Your posts (3)</div>
+        <div style="background:#0a0a0a;border:1px solid #1a1a1a;border-radius:4px;padding:8px 12px;margin-bottom:6px;color:#888;font-size:11px;font-family:monospace;">Hello World</div>
+        <div style="background:#0a0a0a;border:1px solid #1a1a1a;border-radius:4px;padding:8px 12px;margin-bottom:6px;color:#888;font-size:11px;font-family:monospace;">My First Post</div>
+        <div style="background:#0a0a0a;border:1px solid #1a1a1a;border-radius:4px;padding:8px 12px;color:#888;font-size:11px;font-family:monospace;">About Me</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Ember Smoke</h3>
+      <p>Làn khói với ánh đỏ rất nhẹ tại 4 góc, như than hồng âm ỉ. Phần còn lại vẫn tối — chỉ đủ để cảm nhận quyền năng đang cháy bên trong.</p>
+    </div>
+  </div>
+
+  <!-- Option C: Shadow Veil -->
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image" style="height:280px;position:relative;overflow:hidden;background:#000;border-radius:8px;">
+      <div class="smoke-container-c">
+        <div class="smoke-wave smoke-wave-1"></div>
+        <div class="smoke-wave smoke-wave-2"></div>
+        <div class="smoke-wave smoke-wave-3"></div>
+      </div>
+      <div style="padding:30px 20px;position:relative;z-index:1;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+          <span style="color:#d4d4d4;font-weight:500;font-size:14px;font-family:monospace;">Admin</span>
+          <span style="color:#525252;font-size:11px;font-family:monospace;">← View site</span>
+        </div>
+        <div style="color:#737373;font-size:12px;margin-bottom:10px;font-family:monospace;">Your posts (3)</div>
+        <div style="background:#0a0a0a;border:1px solid #1a1a1a;border-radius:4px;padding:8px 12px;margin-bottom:6px;color:#888;font-size:11px;font-family:monospace;">Hello World</div>
+        <div style="background:#0a0a0a;border:1px solid #1a1a1a;border-radius:4px;padding:8px 12px;margin-bottom:6px;color:#888;font-size:11px;font-family:monospace;">My First Post</div>
+        <div style="background:#0a0a0a;border:1px solid #1a1a1a;border-radius:4px;padding:8px 12px;color:#888;font-size:11px;font-family:monospace;">About Me</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Shadow Veil</h3>
+      <p>Sóng bóng tối chảy dọc viền, liên tục nhưng chậm. Như bức màn bóng đêm sống động bao quanh — không màu sắc, chỉ có bóng tối và chiều sâu.</p>
+    </div>
+  </div>
+</div>
+
+<style>
+/* ===== Option A: Dark Smoke Pulse ===== */
+.smoke-container-a {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.smoke-top-a {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 40px;
+  background: radial-gradient(ellipse at 50% 0%, rgba(38,38,38,0.6) 0%, rgba(23,23,23,0.3) 40%, transparent 70%);
+  animation: smoke-breathe-a 4s ease-in-out infinite;
+}
+.smoke-bottom-a {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 40px;
+  background: radial-gradient(ellipse at 50% 100%, rgba(38,38,38,0.6) 0%, rgba(23,23,23,0.3) 40%, transparent 70%);
+  animation: smoke-breathe-a 4s ease-in-out infinite 1s;
+}
+.smoke-left-a {
+  position: absolute;
+  top: 0; bottom: 0; left: 0;
+  width: 40px;
+  background: radial-gradient(ellipse at 0% 50%, rgba(38,38,38,0.6) 0%, rgba(23,23,23,0.3) 40%, transparent 70%);
+  animation: smoke-breathe-a 4s ease-in-out infinite 2s;
+}
+.smoke-right-a {
+  position: absolute;
+  top: 0; bottom: 0; right: 0;
+  width: 40px;
+  background: radial-gradient(ellipse at 100% 50%, rgba(38,38,38,0.6) 0%, rgba(23,23,23,0.3) 40%, transparent 70%);
+  animation: smoke-breathe-a 4s ease-in-out infinite 3s;
+}
+
+@keyframes smoke-breathe-a {
+  0%, 100% {
+    opacity: 0.3;
+    filter: blur(8px);
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    filter: blur(15px);
+    transform: scale(1.05);
+  }
+}
+
+/* ===== Option B: Ember Smoke ===== */
+.smoke-container-b {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.smoke-top-b {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 35px;
+  background: radial-gradient(ellipse at 50% 0%, rgba(30,30,30,0.5) 0%, transparent 70%);
+  animation: smoke-breathe-b 5s ease-in-out infinite;
+}
+.smoke-bottom-b {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 35px;
+  background: radial-gradient(ellipse at 50% 100%, rgba(30,30,30,0.5) 0%, transparent 70%);
+  animation: smoke-breathe-b 5s ease-in-out infinite 1.25s;
+}
+.smoke-left-b {
+  position: absolute;
+  top: 0; bottom: 0; left: 0;
+  width: 35px;
+  background: radial-gradient(ellipse at 0% 50%, rgba(30,30,30,0.5) 0%, transparent 70%);
+  animation: smoke-breathe-b 5s ease-in-out infinite 2.5s;
+}
+.smoke-right-b {
+  position: absolute;
+  top: 0; bottom: 0; right: 0;
+  width: 35px;
+  background: radial-gradient(ellipse at 100% 50%, rgba(30,30,30,0.5) 0%, transparent 70%);
+  animation: smoke-breathe-b 5s ease-in-out infinite 3.75s;
+}
+
+.smoke-corner {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  filter: blur(20px);
+  animation: ember-glow 6s ease-in-out infinite;
+}
+.corner-tl-b { top: -10px; left: -10px; background: rgba(120,30,20,0.3); animation-delay: 0s; }
+.corner-tr-b { top: -10px; right: -10px; background: rgba(120,30,20,0.3); animation-delay: 1.5s; }
+.corner-bl-b { bottom: -10px; left: -10px; background: rgba(120,30,20,0.3); animation-delay: 3s; }
+.corner-br-b { bottom: -10px; right: -10px; background: rgba(120,30,20,0.3); animation-delay: 4.5s; }
+
+@keyframes smoke-breathe-b {
+  0%, 100% { opacity: 0.2; filter: blur(6px); }
+  50% { opacity: 0.7; filter: blur(12px); }
+}
+
+@keyframes ember-glow {
+  0%, 100% { opacity: 0.15; transform: scale(0.8); }
+  50% { opacity: 0.5; transform: scale(1.3); }
+}
+
+/* ===== Option C: Shadow Veil ===== */
+.smoke-container-c {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.smoke-wave {
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  opacity: 0;
+}
+
+.smoke-wave-1 {
+  box-shadow:
+    inset 0 0 30px rgba(20,20,20,0.8),
+    inset 0 0 60px rgba(15,15,15,0.4);
+  animation: veil-drift 6s ease-in-out infinite;
+}
+.smoke-wave-2 {
+  box-shadow:
+    inset 30px 0 40px rgba(20,20,20,0.6),
+    inset -30px 0 40px rgba(20,20,20,0.6);
+  animation: veil-drift 6s ease-in-out infinite 2s;
+}
+.smoke-wave-3 {
+  box-shadow:
+    inset 0 30px 40px rgba(20,20,20,0.6),
+    inset 0 -30px 40px rgba(20,20,20,0.6);
+  animation: veil-drift 6s ease-in-out infinite 4s;
+}
+
+@keyframes veil-drift {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 0.8; }
+}
+</style>

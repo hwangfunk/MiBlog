@@ -6,6 +6,7 @@ import { savePost, deletePost as removePost } from "@/lib/posts";
 import { BlogPost } from "@/types/blog";
 
 export async function createOrUpdatePostAction(formData: FormData) {
+  const id = formData.get("id") as string;
   const originalSlug = formData.get("originalSlug") as string;
   const title = formData.get("title") as string;
   let slug = formData.get("slug") as string;
@@ -20,25 +21,30 @@ export async function createOrUpdatePostAction(formData: FormData) {
   slug = slug.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)+/g, "");
 
   const post: BlogPost = {
+    id: id ? Number(id) : undefined,
     title,
     slug,
     date,
     content,
   };
 
-  // If slug changed, delete the old one
-  if (originalSlug && originalSlug !== slug) {
-    await removePost(originalSlug);
-  }
+  const result = await savePost(post);
 
-  const saved = await savePost(post);
-  if (!saved) {
-    return { success: false, error: "Failed to write post data" };
+  if (!result.success) {
+    if (result.code === 'DUPLICATE_SLUG') {
+      return { success: false, error: "Slug đã tồn tại, vui lòng chọn slug khác." };
+    }
+    return { success: false, error: result.message };
   }
 
   revalidatePath("/");
   revalidatePath("/admin");
   revalidatePath(`/blog/${slug}`);
+
+  // Revalidate old path if slug changed
+  if (originalSlug && originalSlug !== slug) {
+    revalidatePath(`/blog/${originalSlug}`);
+  }
 
   // redirect() must be called outside try/catch — it throws internally
   redirect("/admin");
@@ -49,7 +55,7 @@ export async function deletePostAction(formData: FormData) {
   if (!slug) return;
 
   await removePost(slug);
-  
+
   revalidatePath("/");
   revalidatePath("/admin");
 }

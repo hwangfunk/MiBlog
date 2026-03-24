@@ -1,11 +1,16 @@
 import type { Metadata } from "next";
-import { JetBrains_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { Footer } from "@/components/layout/Footer";
 
-const jetbrainsMono = JetBrains_Mono({
+const jetbrainsMono = localFont({
   variable: "--font-jetbrains",
-  subsets: ["latin", "latin-ext", "vietnamese"],
+  src: [
+    { path: "../../public/fonts/jetbrains-mono-latin-400.woff2", weight: "400", style: "normal" },
+    { path: "../../public/fonts/jetbrains-mono-latin-500.woff2", weight: "500", style: "normal" },
+    { path: "../../public/fonts/jetbrains-mono-latin-700.woff2", weight: "700", style: "normal" },
+  ],
+  display: "swap",
 });
 
 export const metadata: Metadata = {

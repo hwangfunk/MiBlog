@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { BlogPost } from "@/types/blog";
+import { BlogPostSummary } from "@/types/blog";
 
 interface BlogItemProps {
-  post: BlogPost;
+  post: BlogPostSummary;
 }
 
 export const BlogItem = ({ post }: BlogItemProps) => {

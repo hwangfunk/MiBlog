@@ -1,0 +1,266 @@
+<h2>Admin Aura — Kiểu Siri iOS</h2>
+<p class="subtitle">Ánh sáng mỏng chảy dọc 4 cạnh viền, bám sát viewport. Click phương án bạn thích.</p>
+
+<div class="cards">
+  <!-- Option A: Single flowing glow -->
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image" style="height:300px;position:relative;overflow:hidden;background:#000;border-radius:8px;">
+      <!-- SVG border glow -->
+      <svg class="siri-border-a" viewBox="0 0 400 300" preserveAspectRatio="none">
+        <defs>
+          <filter id="glow-a" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="4" result="blur"/>
+            <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+          </filter>
+          <linearGradient id="grad-a" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="transparent"/>
+            <stop offset="40%" stop-color="rgba(0,210,200,0.8)"/>
+            <stop offset="50%" stop-color="rgba(0,230,220,1)"/>
+            <stop offset="60%" stop-color="rgba(0,210,200,0.8)"/>
+            <stop offset="100%" stop-color="transparent"/>
+            <animate attributeName="x1" values="-200;600" dur="4s" repeatCount="indefinite"/>
+            <animate attributeName="x2" values="-100;700" dur="4s" repeatCount="indefinite"/>
+            <animate attributeName="y1" values="-200;600" dur="4s" repeatCount="indefinite"/>
+            <animate attributeName="y2" values="-100;700" dur="4s" repeatCount="indefinite"/>
+          </linearGradient>
+        </defs>
+        <rect x="1" y="1" width="398" height="298" rx="7" fill="none"
+              stroke="url(#grad-a)" stroke-width="2.5" filter="url(#glow-a)"/>
+        <rect x="1" y="1" width="398" height="298" rx="7" fill="none"
+              stroke="url(#grad-a)" stroke-width="1" opacity="0.5"/>
+      </svg>
+      <div class="mock-content-inner">
+        <div class="mock-header"><span class="mock-title">Admin</span><span class="mock-link">← View site</span></div>
+        <div class="mock-subtitle">Your posts (3)</div>
+        <div class="mock-row">Hello World</div>
+        <div class="mock-row">My First Post</div>
+        <div class="mock-row">About Me</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Single Flow</h3>
+      <p>Một vệt sáng duy nhất chảy liên tục dọc theo viền 4 cạnh. Đơn giản, tinh tế.</p>
+    </div>
+  </div>
+
+  <!-- Option B: Dual opposing flows -->
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image" style="height:300px;position:relative;overflow:hidden;background:#000;border-radius:8px;">
+      <!-- Two opposing glows using conic-gradient animation -->
+      <div class="siri-border-b">
+        <div class="glow-track-b glow-b-1"></div>
+        <div class="glow-track-b glow-b-2"></div>
+      </div>
+      <!-- Subtle static border -->
+      <div style="position:absolute;inset:0;border:1px solid rgba(0,210,200,0.08);border-radius:8px;pointer-events:none;z-index:2;"></div>
+      <div class="mock-content-inner">
+        <div class="mock-header"><span class="mock-title">Admin</span><span class="mock-link">← View site</span></div>
+        <div class="mock-subtitle">Your posts (3)</div>
+        <div class="mock-row">Hello World</div>
+        <div class="mock-row">My First Post</div>
+        <div class="mock-row">About Me</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Dual Flow</h3>
+      <p>Hai vệt sáng chảy ngược chiều nhau dọc viền. Khi gặp nhau tạo thành điểm sáng rồi lại tách ra. Sinh động hơn.</p>
+    </div>
+  </div>
+
+  <!-- Option C: Breathing border with traveling accent -->
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image" style="height:300px;position:relative;overflow:hidden;background:#000;border-radius:8px;">
+      <div class="siri-border-c">
+        <!-- Base breathing border -->
+        <div class="base-border-c"></div>
+        <!-- Traveling bright accent -->
+        <div class="accent-c accent-c-1"></div>
+        <div class="accent-c accent-c-2"></div>
+        <div class="accent-c accent-c-3"></div>
+        <div class="accent-c accent-c-4"></div>
+      </div>
+      <div class="mock-content-inner">
+        <div class="mock-header"><span class="mock-title">Admin</span><span class="mock-link">← View site</span></div>
+        <div class="mock-subtitle">Your posts (3)</div>
+        <div class="mock-row">Hello World</div>
+        <div class="mock-row">My First Post</div>
+        <div class="mock-row">About Me</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Breath + Accent</h3>
+      <p>Viền mỏng thở nhẹ liên tục + vệt sáng nhỏ chạy dọc từng cạnh. Kết hợp cả hai — thở cho sự sống, vệt sáng cho chuyển động.</p>
+    </div>
+  </div>
+</div>
+
+<style>
+.mock-content-inner {
+  padding: 30px 20px;
+  position: relative;
+  z-index: 1;
+}
+.mock-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.mock-title { color: #d4d4d4; font-weight: 500; font-size: 14px; font-family: monospace; }
+.mock-link { color: #525252; font-size: 11px; font-family: monospace; }
+.mock-subtitle { color: #737373; font-size: 12px; margin-bottom: 10px; font-family: monospace; }
+.mock-row {
+  background: #0a0a0a;
+  border: 1px solid #1a1a1a;
+  border-radius: 4px;
+  padding: 8px 12px;
+  margin-bottom: 6px;
+  color: #888;
+  font-size: 11px;
+  font-family: monospace;
+}
+
+/* ===== A: SVG Single Flow ===== */
+.siri-border-a {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* ===== B: Dual Flow ===== */
+.siri-border-b {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.glow-track-b {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  filter: blur(12px);
+  background: radial-gradient(circle, rgba(0,210,200,0.7) 0%, rgba(0,210,200,0.2) 40%, transparent 70%);
+}
+
+.glow-b-1 {
+  animation: orbit-b 6s linear infinite;
+}
+.glow-b-2 {
+  animation: orbit-b 6s linear infinite reverse;
+}
+
+@keyframes orbit-b {
+  0%   { top: -15px; left: 0%; }
+  25%  { top: -15px; left: calc(100% - 40px); }
+  25.01% { top: -15px; left: calc(100% - 15px); }
+  50%  { top: calc(100% - 40px); left: calc(100% - 15px); }
+  50.01% { top: calc(100% - 15px); left: calc(100% - 40px); }
+  75%  { top: calc(100% - 15px); left: 0%; }
+  75.01% { top: calc(100% - 40px); left: -15px; }
+  100% { top: -15px; left: -15px; }
+}
+
+/* ===== C: Breath + Accent ===== */
+.siri-border-c {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.base-border-c {
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  border: 1px solid rgba(0,210,200,0.15);
+  box-shadow:
+    0 0 8px rgba(0,210,200,0.06),
+    inset 0 0 8px rgba(0,210,200,0.04);
+  animation: border-breathe-c 3s ease-in-out infinite;
+}
+
+@keyframes border-breathe-c {
+  0%, 100% {
+    border-color: rgba(0,210,200,0.1);
+    box-shadow: 0 0 4px rgba(0,210,200,0.03), inset 0 0 4px rgba(0,210,200,0.02);
+  }
+  50% {
+    border-color: rgba(0,210,200,0.25);
+    box-shadow: 0 0 12px rgba(0,210,200,0.1), inset 0 0 12px rgba(0,210,200,0.06);
+  }
+}
+
+/* Traveling accents along each edge */
+.accent-c {
+  position: absolute;
+  background: linear-gradient(90deg, transparent, rgba(0,210,200,0.6), transparent);
+  filter: blur(3px);
+}
+
+/* Top edge - horizontal */
+.accent-c-1 {
+  top: -1px;
+  height: 3px;
+  width: 60px;
+  animation: slide-right-c 5s ease-in-out infinite;
+}
+
+/* Right edge - vertical */
+.accent-c-2 {
+  right: -1px;
+  width: 3px;
+  height: 60px;
+  background: linear-gradient(180deg, transparent, rgba(0,210,200,0.6), transparent);
+  animation: slide-down-c 5s ease-in-out infinite 1.25s;
+}
+
+/* Bottom edge - horizontal */
+.accent-c-3 {
+  bottom: -1px;
+  height: 3px;
+  width: 60px;
+  animation: slide-left-c 5s ease-in-out infinite 2.5s;
+}
+
+/* Left edge - vertical */
+.accent-c-4 {
+  left: -1px;
+  width: 3px;
+  height: 60px;
+  background: linear-gradient(180deg, transparent, rgba(0,210,200,0.6), transparent);
+  animation: slide-up-c 5s ease-in-out infinite 3.75s;
+}
+
+@keyframes slide-right-c {
+  0%, 10% { left: -60px; opacity: 0; }
+  15% { opacity: 1; }
+  85% { opacity: 1; }
+  90%, 100% { left: calc(100% + 60px); opacity: 0; }
+}
+
+@keyframes slide-down-c {
+  0%, 10% { top: -60px; opacity: 0; }
+  15% { opacity: 1; }
+  85% { opacity: 1; }
+  90%, 100% { top: calc(100% + 60px); opacity: 0; }
+}
+
+@keyframes slide-left-c {
+  0%, 10% { right: -60px; opacity: 0; }
+  15% { opacity: 1; }
+  85% { opacity: 1; }
+  90%, 100% { right: calc(100% + 60px); opacity: 0; }
+}
+
+@keyframes slide-up-c {
+  0%, 10% { bottom: -60px; opacity: 0; }
+  15% { opacity: 1; }
+  85% { opacity: 1; }
+  90%, 100% { bottom: calc(100% + 60px); opacity: 0; }
+}
+</style>

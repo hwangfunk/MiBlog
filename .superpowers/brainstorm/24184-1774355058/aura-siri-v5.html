@@ -1,0 +1,245 @@
+<h2>Admin Aura — Khói + Nhiều vệt sáng</h2>
+<p class="subtitle">Mờ ảo, nhiều vệt, bám sát viền. Xem 2 phương án cải tiến.</p>
+
+<div class="split">
+  <!-- Option A -->
+  <div class="card" data-choice="a" onclick="toggleSelect(this)" style="flex:1;cursor:pointer;">
+    <div style="height:400px;position:relative;overflow:hidden;background:#000;border-radius:8px;">
+      <!-- Multiple smoke trails along edges -->
+      <div class="aura-v5">
+        <!-- Top edge trails -->
+        <div class="trail trail-t1"></div>
+        <div class="trail trail-t2"></div>
+        <div class="trail trail-t3"></div>
+        <!-- Right edge trails -->
+        <div class="trail-v trail-r1"></div>
+        <div class="trail-v trail-r2"></div>
+        <div class="trail-v trail-r3"></div>
+        <!-- Bottom edge trails -->
+        <div class="trail trail-b1"></div>
+        <div class="trail trail-b2"></div>
+        <div class="trail trail-b3"></div>
+        <!-- Left edge trails -->
+        <div class="trail-v trail-l1"></div>
+        <div class="trail-v trail-l2"></div>
+        <div class="trail-v trail-l3"></div>
+        <!-- Ambient glow at edges -->
+        <div class="ambient-top"></div>
+        <div class="ambient-bottom"></div>
+        <div class="ambient-left"></div>
+        <div class="ambient-right"></div>
+      </div>
+      <div class="mock-content-inner">
+        <div class="mock-header"><span class="mock-title">Admin</span><span class="mock-link">← View site</span></div>
+        <div class="mock-subtitle">Your posts (3)</div>
+        <div class="mock-row">Hello World</div>
+        <div class="mock-row">My First Post</div>
+        <div class="mock-row">About Me</div>
+      </div>
+    </div>
+    <div style="padding:12px;">
+      <h3 style="color:#eee;margin:0 0 4px;">A — Multi Smoke Trails</h3>
+      <p style="color:#999;font-size:13px;margin:0;">Nhiều đám khói mờ trôi dọc 4 cạnh, mỗi đám khác tốc độ, kèm ambient glow thở nhẹ ở viền.</p>
+    </div>
+  </div>
+
+  <!-- Option B -->
+  <div class="card" data-choice="b" onclick="toggleSelect(this)" style="flex:1;cursor:pointer;">
+    <div style="height:400px;position:relative;overflow:hidden;background:#000;border-radius:8px;">
+      <!-- Continuous smoke ribbon using pseudo-3D layers -->
+      <div class="aura-v5b">
+        <!-- Layer 1: deep blur background glow -->
+        <div class="ribbon-layer ribbon-layer-1">
+          <div class="ribbon ribbon-a1"></div>
+          <div class="ribbon ribbon-a2"></div>
+          <div class="ribbon ribbon-a3"></div>
+          <div class="ribbon ribbon-a4"></div>
+        </div>
+        <!-- Layer 2: mid blur -->
+        <div class="ribbon-layer ribbon-layer-2">
+          <div class="ribbon ribbon-b1"></div>
+          <div class="ribbon ribbon-b2"></div>
+          <div class="ribbon ribbon-b3"></div>
+          <div class="ribbon ribbon-b4"></div>
+        </div>
+        <!-- Layer 3: sharp accent -->
+        <div class="ribbon-layer ribbon-layer-3">
+          <div class="ribbon ribbon-c1"></div>
+          <div class="ribbon ribbon-c2"></div>
+        </div>
+      </div>
+      <div class="mock-content-inner">
+        <div class="mock-header"><span class="mock-title">Admin</span><span class="mock-link">← View site</span></div>
+        <div class="mock-subtitle">Your posts (3)</div>
+        <div class="mock-row">Hello World</div>
+        <div class="mock-row">My First Post</div>
+        <div class="mock-row">About Me</div>
+      </div>
+    </div>
+    <div style="padding:12px;">
+      <h3 style="color:#eee;margin:0 0 4px;">B — Layered Smoke Ribbon</h3>
+      <p style="color:#999;font-size:13px;margin:0;">3 lớp khói chồng lên nhau (sâu → trung → sắc nét), tạo chiều sâu 3D. Giống Siri nhất.</p>
+    </div>
+  </div>
+</div>
+
+<style>
+.mock-content-inner { padding: 30px 20px; position: relative; z-index: 1; }
+.mock-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.mock-title { color: #d4d4d4; font-weight: 500; font-size: 14px; font-family: monospace; }
+.mock-link { color: #525252; font-size: 11px; font-family: monospace; }
+.mock-subtitle { color: #737373; font-size: 12px; margin-bottom: 10px; font-family: monospace; }
+.mock-row { background: #0a0a0a; border: 1px solid #1a1a1a; border-radius: 4px; padding: 8px 12px; margin-bottom: 6px; color: #888; font-size: 11px; font-family: monospace; }
+
+/* ===== A: Multi Smoke Trails ===== */
+.aura-v5 {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* Horizontal trails */
+.trail {
+  position: absolute;
+  height: 6px;
+  width: 100px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(0,210,200,0.6) 0%, rgba(0,210,200,0.15) 50%, transparent 80%);
+  filter: blur(8px);
+}
+
+/* Vertical trails */
+.trail-v {
+  position: absolute;
+  width: 6px;
+  height: 100px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(0,210,200,0.6) 0%, rgba(0,210,200,0.15) 50%, transparent 80%);
+  filter: blur(8px);
+}
+
+/* Top trails */
+.trail-t1 { top: 0; animation: slide-h 6s linear infinite; }
+.trail-t2 { top: 0; width: 70px; animation: slide-h 8s linear infinite 2s; opacity: 0.7; }
+.trail-t3 { top: 0; width: 120px; animation: slide-h 10s linear infinite 4.5s; filter: blur(12px); opacity: 0.5; }
+
+/* Bottom trails */
+.trail-b1 { bottom: 0; animation: slide-h-rev 7s linear infinite 1s; }
+.trail-b2 { bottom: 0; width: 80px; animation: slide-h-rev 9s linear infinite 3s; opacity: 0.7; }
+.trail-b3 { bottom: 0; width: 130px; animation: slide-h-rev 11s linear infinite 5s; filter: blur(12px); opacity: 0.5; }
+
+/* Right trails */
+.trail-r1 { right: 0; animation: slide-v 7s linear infinite 0.5s; }
+.trail-r2 { right: 0; height: 70px; animation: slide-v 9s linear infinite 3s; opacity: 0.7; }
+.trail-r3 { right: 0; height: 120px; animation: slide-v 11s linear infinite 6s; filter: blur(12px); opacity: 0.5; }
+
+/* Left trails */
+.trail-l1 { left: 0; animation: slide-v-rev 6.5s linear infinite 1.5s; }
+.trail-l2 { left: 0; height: 80px; animation: slide-v-rev 8.5s linear infinite 4s; opacity: 0.7; }
+.trail-l3 { left: 0; height: 110px; animation: slide-v-rev 10s linear infinite 7s; filter: blur(12px); opacity: 0.5; }
+
+@keyframes slide-h {
+  0% { left: -120px; opacity: 0; }
+  5% { opacity: 1; }
+  95% { opacity: 1; }
+  100% { left: calc(100% + 20px); opacity: 0; }
+}
+@keyframes slide-h-rev {
+  0% { right: -120px; opacity: 0; }
+  5% { opacity: 1; }
+  95% { opacity: 1; }
+  100% { right: calc(100% + 20px); opacity: 0; }
+}
+@keyframes slide-v {
+  0% { top: -120px; opacity: 0; }
+  5% { opacity: 1; }
+  95% { opacity: 1; }
+  100% { top: calc(100% + 20px); opacity: 0; }
+}
+@keyframes slide-v-rev {
+  0% { bottom: -120px; opacity: 0; }
+  5% { opacity: 1; }
+  95% { opacity: 1; }
+  100% { bottom: calc(100% + 20px); opacity: 0; }
+}
+
+/* Ambient glow */
+.ambient-top {
+  position: absolute; top: 0; left: 0; right: 0; height: 20px;
+  background: linear-gradient(to bottom, rgba(0,210,200,0.08), transparent);
+  animation: ambient-pulse 4s ease-in-out infinite;
+}
+.ambient-bottom {
+  position: absolute; bottom: 0; left: 0; right: 0; height: 20px;
+  background: linear-gradient(to top, rgba(0,210,200,0.08), transparent);
+  animation: ambient-pulse 4s ease-in-out infinite 1s;
+}
+.ambient-left {
+  position: absolute; top: 0; bottom: 0; left: 0; width: 20px;
+  background: linear-gradient(to right, rgba(0,210,200,0.08), transparent);
+  animation: ambient-pulse 4s ease-in-out infinite 2s;
+}
+.ambient-right {
+  position: absolute; top: 0; bottom: 0; right: 0; width: 20px;
+  background: linear-gradient(to left, rgba(0,210,200,0.08), transparent);
+  animation: ambient-pulse 4s ease-in-out infinite 3s;
+}
+@keyframes ambient-pulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+/* ===== B: Layered Smoke Ribbon ===== */
+.aura-v5b {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.ribbon-layer {
+  position: absolute;
+  inset: 0;
+}
+
+/* Layer 1: deep glow */
+.ribbon-layer-1 { filter: blur(18px); opacity: 0.4; }
+.ribbon-layer-2 { filter: blur(10px); opacity: 0.6; }
+.ribbon-layer-3 { filter: blur(4px); opacity: 0.8; }
+
+.ribbon {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(0,210,200,0.7) 0%, rgba(0,210,200,0.2) 40%, transparent 70%);
+}
+
+/* Layer 1 ribbons */
+.ribbon-a1 { width: 150px; height: 12px; top: 0; animation: rslide-h 7s linear infinite; }
+.ribbon-a2 { width: 12px; height: 150px; right: 0; animation: rslide-v 8s linear infinite 1.5s; }
+.ribbon-a3 { width: 150px; height: 12px; bottom: 0; animation: rslide-h-rev 9s linear infinite 3s; }
+.ribbon-a4 { width: 12px; height: 150px; left: 0; animation: rslide-v-rev 7.5s linear infinite 4.5s; }
+
+/* Layer 2 ribbons */
+.ribbon-b1 { width: 100px; height: 8px; top: 0; animation: rslide-h 9s linear infinite 2s; }
+.ribbon-b2 { width: 8px; height: 100px; right: 0; animation: rslide-v 7s linear infinite 0s; }
+.ribbon-b3 { width: 100px; height: 8px; bottom: 0; animation: rslide-h-rev 8s linear infinite 1s; }
+.ribbon-b4 { width: 8px; height: 100px; left: 0; animation: rslide-v-rev 10s linear infinite 3s; }
+
+/* Layer 3 ribbons */
+.ribbon-c1 { width: 60px; height: 4px; top: 0; animation: rslide-h 5s linear infinite 1s; }
+.ribbon-c2 { width: 4px; height: 60px; right: 0; animation: rslide-v 6s linear infinite 2.5s; }
+
+@keyframes rslide-h {
+  0% { left: -150px; } 100% { left: calc(100% + 50px); }
+}
+@keyframes rslide-h-rev {
+  0% { right: -150px; } 100% { right: calc(100% + 50px); }
+}
+@keyframes rslide-v {
+  0% { top: -150px; } 100% { top: calc(100% + 50px); }
+}
+@keyframes rslide-v-rev {
+  0% { bottom: -150px; } 100% { bottom: calc(100% + 50px); }
+}
+</style>

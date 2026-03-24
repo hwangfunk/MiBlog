@@ -1,11 +1,9 @@
-"use client";
-
 import { BlogItem } from "./BlogItem";
-import { BlogPost } from "@/types/blog";
+import { BlogPostSummary } from "@/types/blog";
 import { FadeInStagger, FadeInStaggerItem } from "../animations/FadeInStagger";
 
 interface BlogListProps {
-  posts: BlogPost[];
+  posts: BlogPostSummary[];
 }
 
 export const BlogList = ({ posts }: BlogListProps) => {

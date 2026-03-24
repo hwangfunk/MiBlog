@@ -1,3 +1,33 @@
 {
-  "enabledPlugins": {}
+  "permissions": {
+    "allow": [
+      "mcp__plugin_supabase_supabase__list_organizations",
+      "mcp__plugin_supabase_supabase__list_projects",
+      "mcp__plugin_supabase_supabase__get_project",
+      "mcp__plugin_supabase_supabase__list_tables",
+      "mcp__plugin_supabase_supabase__list_migrations",
+      "mcp__plugin_supabase_supabase__list_edge_functions",
+      "mcp__plugin_supabase_supabase__list_extensions",
+      "mcp__plugin_supabase_supabase__get_project_url",
+      "mcp__plugin_supabase_supabase__apply_migration",
+      "Bash(pnpm lint:*)",
+      "Bash(pnpm build:*)",
+      "Bash(pnpm remove:*)",
+      "Bash(curl -sL \"https://fonts.google.com/download?family=JetBrains+Mono\" -o /tmp/jetbrains-mono.zip)",
+      "Bash(unzip -o /tmp/jetbrains-mono.zip -d /tmp/jetbrains-mono/)",
+      "Bash(ANALYZE=true pnpm build)",
+      "Bash(find /Users/quangminh/Home/Typescript/Websites/MiBlog/.next/static -name *.js -exec ls -la {})",
+      "Bash(2)",
+      "Bash(sort -k5 -n -r)",
+      "Bash(grep -l \"framer-motion\\\\|framer\" /Users/quangminh/Home/Typescript/Websites/MiBlog/.next/static/chunks/*.js)",
+      "mcp__plugin_supabase_supabase__execute_sql",
+      "mcp__plugin_supabase_supabase__search_docs",
+      "Bash(find /Users/quangminh/Home/Typescript/Websites/MiBlog/node_modules/next/dist/docs/01-app -name *route*)",
+      "Bash(/Users/quangminh/.claude/plugins/cache/claude-plugins-official/superpowers/5.0.5/skills/brainstorming/scripts/start-server.sh --project-dir /Users/quangminh/Home/Typescript/Websites/MiBlog)"
+    ]
+  },
+  "enabledPlugins": {
+    "superpowers@claude-plugins-official": true,
+    "supabase@claude-plugins-official": true
+  }
 }

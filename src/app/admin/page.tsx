@@ -1,9 +1,9 @@
 import Link from "next/link";
-import { getPosts } from "@/lib/posts";
-import { deletePostAction } from "./actions";
+import { listPosts } from "@/lib/posts";
+import { DeleteButton } from "./components/DeleteButton";
 
 export default async function AdminPage() {
-  const posts = await getPosts();
+  const posts = await listPosts();
 
   return (
     <div className="flex flex-col gap-6">
@@ -65,15 +65,7 @@ export default async function AdminPage() {
                 >
                   Edit
                 </Link>
-                <form action={deletePostAction}>
-                  <input type="hidden" name="slug" value={post.slug} />
-                  <button
-                    type="submit"
-                    className="text-sm text-neutral-700 hover:text-red-400 transition-colors"
-                  >
-                    Delete
-                  </button>
-                </form>
+                <DeleteButton slug={post.slug} title={post.title} />
               </div>
             </div>
           ))

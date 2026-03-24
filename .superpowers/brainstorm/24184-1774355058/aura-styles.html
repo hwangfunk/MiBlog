@@ -1,0 +1,126 @@
+<h2>Admin Aura Effect — Chọn phong cách</h2>
+<p class="subtitle">Click vào phương án bạn thích nhất. Aura viền viewport với animation liên tục.</p>
+
+<div class="cards">
+  <!-- Option A: Gradient Border Sweep -->
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image" style="height:260px;position:relative;overflow:hidden;background:#000;border-radius:8px;">
+      <div style="position:absolute;inset:0;pointer-events:none;">
+        <!-- Simulated viewport border aura -->
+        <div style="position:absolute;inset:0;border:2px solid transparent;border-radius:8px;background:linear-gradient(#000,#000) padding-box, conic-gradient(from var(--angle,0deg), #0ff, #b400ff, #ff00aa, #0ff) border-box;animation:spin 3s linear infinite;"></div>
+        <div style="position:absolute;inset:0;border-radius:8px;box-shadow:inset 0 0 15px rgba(0,255,255,0.15);"></div>
+      </div>
+      <!-- Mock admin content -->
+      <div style="padding:30px 20px;position:relative;z-index:1;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+          <span style="color:#e5e5e5;font-weight:500;font-size:14px;">Admin</span>
+          <span style="color:#666;font-size:11px;">← View site</span>
+        </div>
+        <div style="color:#888;font-size:12px;margin-bottom:8px;">Your posts (3)</div>
+        <div style="background:#111;border-radius:4px;padding:8px 12px;margin-bottom:6px;color:#aaa;font-size:11px;">Hello World</div>
+        <div style="background:#111;border-radius:4px;padding:8px 12px;margin-bottom:6px;color:#aaa;font-size:11px;">My First Post</div>
+        <div style="background:#111;border-radius:4px;padding:8px 12px;color:#aaa;font-size:11px;">About Me</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Conic Gradient Sweep</h3>
+      <p>Gradient xoay liên tục quanh viền (cyan → purple → pink). Mạnh mẽ, futuristic. Như khung năng lượng đang quay.</p>
+    </div>
+  </div>
+
+  <!-- Option B: Breathing Glow -->
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image" style="height:260px;position:relative;overflow:hidden;background:#000;border-radius:8px;">
+      <div style="position:absolute;inset:0;pointer-events:none;">
+        <div style="position:absolute;inset:0;border:1.5px solid rgba(0,255,255,0.4);border-radius:8px;box-shadow:inset 0 0 20px rgba(0,255,255,0.1), 0 0 20px rgba(0,255,255,0.08);animation:breathe 2.5s ease-in-out infinite;"></div>
+      </div>
+      <div style="padding:30px 20px;position:relative;z-index:1;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+          <span style="color:#e5e5e5;font-weight:500;font-size:14px;">Admin</span>
+          <span style="color:#666;font-size:11px;">← View site</span>
+        </div>
+        <div style="color:#888;font-size:12px;margin-bottom:8px;">Your posts (3)</div>
+        <div style="background:#111;border-radius:4px;padding:8px 12px;margin-bottom:6px;color:#aaa;font-size:11px;">Hello World</div>
+        <div style="background:#111;border-radius:4px;padding:8px 12px;margin-bottom:6px;color:#aaa;font-size:11px;">My First Post</div>
+        <div style="background:#111;border-radius:4px;padding:8px 12px;color:#aaa;font-size:11px;">About Me</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Breathing Glow</h3>
+      <p>Viền cyan nhẹ nhàng sáng/tối theo nhịp thở. Subtle, elegant. Không gây mất tập trung khi làm việc lâu.</p>
+    </div>
+  </div>
+
+  <!-- Option C: Traveling Light -->
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image" style="height:260px;position:relative;overflow:hidden;background:#000;border-radius:8px;">
+      <div style="position:absolute;inset:0;pointer-events:none;">
+        <div style="position:absolute;inset:0;border:1.5px solid rgba(0,255,255,0.2);border-radius:8px;"></div>
+        <!-- Traveling light dot -->
+        <div style="position:absolute;width:60px;height:2px;top:0;left:0;background:linear-gradient(90deg,transparent,#0ff,transparent);animation:travel-top 4s linear infinite;border-radius:2px;filter:blur(1px);"></div>
+        <div style="position:absolute;width:2px;height:60px;top:0;right:0;background:linear-gradient(180deg,transparent,#0ff,transparent);animation:travel-right 4s linear infinite 1s;border-radius:2px;filter:blur(1px);"></div>
+        <div style="position:absolute;width:60px;height:2px;bottom:0;right:0;background:linear-gradient(270deg,transparent,#0ff,transparent);animation:travel-bottom 4s linear infinite 2s;border-radius:2px;filter:blur(1px);"></div>
+        <div style="position:absolute;width:2px;height:60px;bottom:0;left:0;background:linear-gradient(0deg,transparent,#0ff,transparent);animation:travel-left 4s linear infinite 3s;border-radius:2px;filter:blur(1px);"></div>
+      </div>
+      <div style="padding:30px 20px;position:relative;z-index:1;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+          <span style="color:#e5e5e5;font-weight:500;font-size:14px;">Admin</span>
+          <span style="color:#666;font-size:11px;">← View site</span>
+        </div>
+        <div style="color:#888;font-size:12px;margin-bottom:8px;">Your posts (3)</div>
+        <div style="background:#111;border-radius:4px;padding:8px 12px;margin-bottom:6px;color:#aaa;font-size:11px;">Hello World</div>
+        <div style="background:#111;border-radius:4px;padding:8px 12px;margin-bottom:6px;color:#aaa;font-size:11px;">My First Post</div>
+        <div style="background:#111;border-radius:4px;padding:8px 12px;color:#aaa;font-size:11px;">About Me</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Traveling Light</h3>
+      <p>Điểm sáng cyan di chuyển liên tục dọc 4 cạnh viền. Như dòng năng lượng chảy quanh khung. Tinh tế nhưng vẫn thể hiện quyền năng.</p>
+    </div>
+  </div>
+</div>
+
+<style>
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes spin {
+  to { --angle: 360deg; }
+}
+
+@keyframes breathe {
+  0%, 100% {
+    border-color: rgba(0,255,255,0.2);
+    box-shadow: inset 0 0 10px rgba(0,255,255,0.05), 0 0 10px rgba(0,255,255,0.03);
+  }
+  50% {
+    border-color: rgba(0,255,255,0.5);
+    box-shadow: inset 0 0 25px rgba(0,255,255,0.15), 0 0 25px rgba(0,255,255,0.1);
+  }
+}
+
+@keyframes travel-top {
+  0% { left: -60px; }
+  100% { left: 100%; }
+}
+@keyframes travel-right {
+  0% { top: -60px; }
+  100% { top: 100%; }
+}
+@keyframes travel-bottom {
+  0% { right: -60px; }
+  100% { right: 100%; }
+}
+@keyframes travel-left {
+  0% { bottom: -60px; }
+  100% { bottom: 100%; }
+}
+
+.card-image div[style*="conic-gradient"] {
+  background: linear-gradient(#000,#000) padding-box,
+              conic-gradient(from var(--angle, 0deg), #0ff, #b400ff, #ff00aa, #0ff) border-box !important;
+}
+</style>

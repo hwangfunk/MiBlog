@@ -1,0 +1,10 @@
+{"type":"server-started","port":50146,"host":"127.0.0.1","url_host":"localhost","url":"http://localhost:50146","screen_dir":"/Users/quangminh/Home/Typescript/Websites/MiBlog/.superpowers/brainstorm/24184-1774355058"}
+{"type":"screen-added","file":"/Users/quangminh/Home/Typescript/Websites/MiBlog/.superpowers/brainstorm/24184-1774355058/aura-styles.html"}
+{"type":"screen-added","file":"/Users/quangminh/Home/Typescript/Websites/MiBlog/.superpowers/brainstorm/24184-1774355058/aura-smoke-v2.html"}
+{"type":"screen-added","file":"/Users/quangminh/Home/Typescript/Websites/MiBlog/.superpowers/brainstorm/24184-1774355058/aura-smoke-v3.html"}
+{"type":"screen-added","file":"/Users/quangminh/Home/Typescript/Websites/MiBlog/.superpowers/brainstorm/24184-1774355058/aura-siri-v4.html"}
+{"source":"user-event","type":"click","text":"Admin← View site\n        Your posts (3)\n        Hello World\n        My First Post\n        About Me\n      \n    \n    \n      A — Single Flow\n      Một vệt sáng duy nhất chảy liên tục dọc theo viền 4 cạnh. Đơn giản, tinh tế.","choice":"a","id":null,"timestamp":1774355877816}
+{"type":"screen-added","file":"/Users/quangminh/Home/Typescript/Websites/MiBlog/.superpowers/brainstorm/24184-1774355058/aura-siri-v5.html"}
+{"source":"user-event","type":"click","text":"Admin← View site\n        Your posts (3)\n        Hello World\n        My First Post\n        About Me\n      \n    \n    \n      A — Multi Smoke Trails\n      Nhiều đám khói mờ trôi dọc 4 cạnh, mỗi đám khác tốc độ, kèm ambient glow thở nhẹ ở viền.","choice":"a","id":null,"timestamp":1774357145290}
+{"type":"screen-added","file":"/Users/quangminh/Home/Typescript/Websites/MiBlog/.superpowers/brainstorm/24184-1774355058/waiting.html"}
+{"type":"server-stopped","reason":"idle timeout"}
