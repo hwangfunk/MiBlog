@@ -1,11 +1,30 @@
 import { BlogPost, BlogPostSummary } from '@/types/blog';
+import { cacheLife, cacheTag } from 'next/cache';
 import { supabase } from './supabase';
 
 export type SaveResult =
   | { success: true }
   | { success: false; code: 'DUPLICATE_SLUG' | 'DB_ERROR'; message: string };
 
+export const POSTS_CACHE_TAG = 'posts';
+
+export function getPostCacheTag(slug: string) {
+  return `post:${slug}`;
+}
+
+function applyBlogCachePolicy() {
+  cacheLife({
+    stale: 30,
+    revalidate: 60 * 60 * 24,
+    expire: 60 * 60 * 24 * 7,
+  });
+}
+
 export async function listPosts(): Promise<BlogPostSummary[]> {
+  'use cache';
+  applyBlogCachePolicy();
+  cacheTag(POSTS_CACHE_TAG);
+
   const { data, error } = await supabase
     .from('posts')
     .select('slug, title, date')
@@ -16,6 +35,10 @@ export async function listPosts(): Promise<BlogPostSummary[]> {
 }
 
 export async function getPostBySlug(slug: string): Promise<BlogPost | undefined> {
+  'use cache';
+  applyBlogCachePolicy();
+  cacheTag(POSTS_CACHE_TAG, getPostCacheTag(slug));
+
   const { data, error } = await supabase
     .from('posts')
     .select('*')

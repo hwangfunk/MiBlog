@@ -1,14 +1,25 @@
+import { Suspense } from "react";
 import Link from "next/link";
+import { connection } from "next/server";
 import { PageWrapper } from "@/components/PageWrapper";
 import { AdminAura } from "@/components/admin/AdminAura";
 import { LogoutButton } from "./components/LogoutButton";
 import { verifySession } from "@/lib/session";
 
-export default async function AdminLayout({
+function AdminLayoutFallback({ children }: { children: React.ReactNode }) {
+  return (
+    <PageWrapper className="flex flex-col flex-1 h-full">
+      {children}
+    </PageWrapper>
+  );
+}
+
+async function AdminLayoutContent({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  await connection();
   const session = await verifySession();
   const isAuthenticated = !!session?.isAdmin;
 
@@ -43,5 +54,17 @@ export default async function AdminLayout({
         </main>
       </PageWrapper>
     </>
+  );
+}
+
+export default function AdminLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <Suspense fallback={<AdminLayoutFallback>{children}</AdminLayoutFallback>}>
+      <AdminLayoutContent>{children}</AdminLayoutContent>
+    </Suspense>
   );
 }

@@ -1,8 +1,13 @@
 "use server"
 
-import { revalidatePath } from "next/cache";
+import { revalidatePath, updateTag } from "next/cache";
 import { redirect } from "next/navigation";
-import { savePost, deletePost as removePost } from "@/lib/posts";
+import {
+  deletePost as removePost,
+  getPostCacheTag,
+  POSTS_CACHE_TAG,
+  savePost,
+} from "@/lib/posts";
 import { BlogPost } from "@/types/blog";
 
 export async function createOrUpdatePostAction(formData: FormData) {
@@ -37,12 +42,21 @@ export async function createOrUpdatePostAction(formData: FormData) {
     return { success: false, error: result.message };
   }
 
+  updateTag(POSTS_CACHE_TAG);
+  updateTag(getPostCacheTag(slug));
+
+  if (originalSlug && originalSlug !== slug) {
+    updateTag(getPostCacheTag(originalSlug));
+  }
+
   revalidatePath("/");
   revalidatePath("/admin");
+  revalidatePath(`/admin-preview/${slug}`);
   revalidatePath(`/blog/${slug}`);
 
   // Revalidate old path if slug changed
   if (originalSlug && originalSlug !== slug) {
+    revalidatePath(`/admin-preview/${originalSlug}`);
     revalidatePath(`/blog/${originalSlug}`);
   }
 
@@ -56,6 +70,11 @@ export async function deletePostAction(formData: FormData) {
 
   await removePost(slug);
 
+  updateTag(POSTS_CACHE_TAG);
+  updateTag(getPostCacheTag(slug));
+
   revalidatePath("/");
   revalidatePath("/admin");
+  revalidatePath(`/admin-preview/${slug}`);
+  revalidatePath(`/blog/${slug}`);
 }

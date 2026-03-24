@@ -35,7 +35,7 @@ export default async function AdminPage() {
             >
               {/* Eye icon for view — positioned at the start of the title */}
               <Link
-                href={`/blog/${post.slug}?from=admin`}
+                href={`/admin-preview/${post.slug}`}
                 className="mr-3 shrink-0 text-neutral-700 hover:text-cyan-400 transition-colors"
                 title="Preview post"
               >
