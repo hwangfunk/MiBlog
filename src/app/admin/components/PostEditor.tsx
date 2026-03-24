@@ -138,7 +138,7 @@ export default function PostEditor({ post }: { post?: BlogPost }) {
               onChange={setContent} 
               modules={modules}
               placeholder="Start writing your story..."
-              className="bg-transparent text-neutral-400 rounded-none border-0 overflow-visible" 
+              className="bg-transparent text-neutral-400 rounded-none border-0 overflow-x-hidden" 
             />
           </div>
         </div>

@@ -16,6 +16,14 @@ body {
   color: var(--foreground);
 }
 
+/* Blog content text styling */
+.prose p {
+  text-align: justify;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
 /* Blog content link styling */
 .prose a {
   color: var(--link-color);
@@ -121,6 +129,9 @@ body {
   font-size: 0.875rem;
   line-height: 1.625;
   color: #a1a1aa;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  overflow-x: hidden;
 }
 
 @media (min-width: 768px) {
@@ -157,6 +168,10 @@ body {
 
 .editor-blog-match .ql-editor p {
   margin-bottom: 1.25rem;
+  text-align: justify;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
 }
 
 .editor-blog-match .ql-editor blockquote {
