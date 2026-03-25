@@ -1,15 +1,8 @@
-import { Suspense } from "react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { BlogPostPage } from "@/components/blog/BlogPostPage";
-import { getPostBySlug, listPosts } from "@/lib/posts";
-import { htmlToPlainText } from "@/lib/sanitize";
-import BlogPostLoading from "./loading";
-
-export const unstable_instant = {
-  prefetch: "runtime",
-  samples: [{ params: { slug: "sample-post" } }],
-};
+import { getPublishedPostBySlug, listPublishedPosts } from "@/lib/posts";
+import { htmlToPlainTextForMetadata } from "@/lib/sanitize-server";
 
 export async function generateMetadata({
   params,
@@ -17,13 +10,13 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const post = await getPostBySlug(slug);
+  const post = await getPublishedPostBySlug(slug);
 
   if (!post) {
     return { title: "Post not found" };
   }
 
-  const description = post.content ? htmlToPlainText(post.content) : "";
+  const description = await htmlToPlainTextForMetadata(post.contentHtml);
 
   return {
     title: `${post.title} | qanx._.minhhh blog`,
@@ -37,30 +30,21 @@ export async function generateMetadata({
 }
 
 export async function generateStaticParams() {
-  const posts = await listPosts();
+  const posts = await listPublishedPosts();
   return posts.map((post) => ({ slug: post.slug }));
 }
 
-async function BlogPostContent({ slug }: { slug: string }) {
-  const post = await getPostBySlug(slug);
+export default async function BlogPost({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const post = await getPublishedPostBySlug(slug);
 
   if (!post) {
     notFound();
   }
 
   return <BlogPostPage post={post} backHref="/" backLabel="Back to home" />;
-}
-
-export default function BlogPost({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
-  return (
-    <Suspense fallback={<BlogPostLoading />}>
-      {params.then(({ slug }) => (
-        <BlogPostContent slug={slug} />
-      ))}
-    </Suspense>
-  );
 }

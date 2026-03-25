@@ -1,30 +1,113 @@
 "use server";
 
 import { redirect } from "next/navigation";
-import { createSession, deleteSession, verifyPassword } from "@/lib/session";
+import { logAdminAuditEvent } from "@/lib/admin-audit";
+import {
+  clearAdminLoginAttempts,
+  getAdminLoginRateLimit,
+  registerFailedAdminLoginAttempt,
+} from "@/lib/admin-rate-limit";
+import { getActionRequestContext } from "@/lib/admin-request";
+import {
+  clearAdminSession,
+  createAdminSession,
+  verifyAdminPassword,
+} from "@/lib/session";
 
-export async function loginAction(formData: FormData) {
-  const password = formData.get("password") as string;
+export interface LoginActionState {
+  error: string | null;
+  lockedUntil: string | null;
+  requestId: string | null;
+}
 
-  if (!password) {
-    return { error: "Please enter password" };
+function getSafeRedirectTarget(fromPath: string) {
+  if (fromPath.startsWith("/") && !fromPath.startsWith("//")) {
+    return fromPath;
   }
 
-  const isValid = await verifyPassword(password);
+  return "/admin";
+}
 
-  if (!isValid) {
-    return { error: "Incorrect password" };
+export async function loginAction(
+  _previousState: LoginActionState,
+  formData: FormData,
+): Promise<LoginActionState> {
+  const requestContext = await getActionRequestContext();
+  const password = String(formData.get("password") ?? "");
+  const from = getSafeRedirectTarget(String(formData.get("from") ?? "/admin"));
+
+  if (!password.trim()) {
+    return {
+      error: "Please enter the admin password.",
+      lockedUntil: null,
+      requestId: requestContext.correlationId,
+    };
   }
 
-  await createSession();
+  const rateLimit = await getAdminLoginRateLimit(requestContext.fingerprint);
 
-  const from = formData.get("from") as string;
-  // Only allow internal redirects to prevent open redirect attacks
-  const safeFrom = from && from.startsWith("/") && !from.startsWith("//") ? from : "/admin";
-  redirect(safeFrom);
+  if (rateLimit.blockedUntil) {
+    await logAdminAuditEvent({
+      eventType: "admin.login.blocked",
+      success: false,
+      requestContext,
+      metadata: {
+        from,
+        blockedUntil: rateLimit.blockedUntil,
+      },
+    });
+
+    return {
+      error: "Too many failed attempts. Try again later.",
+      lockedUntil: rateLimit.blockedUntil,
+      requestId: requestContext.correlationId,
+    };
+  }
+
+  const isValidPassword = await verifyAdminPassword(password);
+
+  if (!isValidPassword) {
+    const failedAttempt = await registerFailedAdminLoginAttempt(requestContext.fingerprint);
+
+    await logAdminAuditEvent({
+      eventType: "admin.login.failed",
+      success: false,
+      requestContext,
+      metadata: {
+        from,
+        blockedUntil: failedAttempt.blockedUntil,
+        remainingAttempts: failedAttempt.remainingAttempts,
+      },
+    });
+
+    return {
+      error: failedAttempt.blockedUntil
+        ? "Too many failed attempts. Try again later."
+        : "Invalid credentials.",
+      lockedUntil: failedAttempt.blockedUntil,
+      requestId: requestContext.correlationId,
+    };
+  }
+
+  await clearAdminLoginAttempts(requestContext.fingerprint);
+  await createAdminSession();
+  await logAdminAuditEvent({
+    eventType: "admin.login.succeeded",
+    success: true,
+    requestContext,
+    metadata: { from },
+  });
+
+  redirect(from);
 }
 
 export async function logoutAction() {
-  await deleteSession();
+  const requestContext = await getActionRequestContext();
+  await clearAdminSession();
+  await logAdminAuditEvent({
+    eventType: "admin.logout",
+    success: true,
+    requestContext,
+  });
   redirect("/");
 }

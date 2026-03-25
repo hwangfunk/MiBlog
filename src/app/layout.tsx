@@ -9,6 +9,9 @@ const jetbrainsMono = localFont({
     { path: "../../public/fonts/jetbrains-mono-latin-400.woff2", weight: "400", style: "normal" },
     { path: "../../public/fonts/jetbrains-mono-latin-500.woff2", weight: "500", style: "normal" },
     { path: "../../public/fonts/jetbrains-mono-latin-700.woff2", weight: "700", style: "normal" },
+    { path: "../../public/fonts/jetbrains-mono-vietnamese-400.woff2", weight: "400", style: "normal" },
+    { path: "../../public/fonts/jetbrains-mono-vietnamese-500.woff2", weight: "500", style: "normal" },
+    { path: "../../public/fonts/jetbrains-mono-vietnamese-700.woff2", weight: "700", style: "normal" },
   ],
   display: "swap",
 });

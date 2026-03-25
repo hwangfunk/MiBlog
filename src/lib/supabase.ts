@@ -1,13 +1,21 @@
-import 'server-only';
-import { createClient } from '@supabase/supabase-js';
+import "server-only";
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
-const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
+import { createClient } from "@supabase/supabase-js";
 
-if (!supabaseUrl || !supabaseKey) {
-  console.warn('Supabase credentials are missing. Make sure to set NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY in your .env.local file.');
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+if (!supabaseUrl) {
+  throw new Error("NEXT_PUBLIC_SUPABASE_URL environment variable is not set");
 }
 
-// We use the service_role key to bypass RLS, because we only interact with
-// Supabase from Next.js server actions (which are already protected by our admin auth).
-export const supabase = createClient(supabaseUrl, supabaseKey);
+if (!supabaseServiceRoleKey) {
+  throw new Error("SUPABASE_SERVICE_ROLE_KEY environment variable is not set");
+}
+
+export const supabase = createClient(supabaseUrl, supabaseServiceRoleKey, {
+  auth: {
+    persistSession: false,
+    autoRefreshToken: false,
+  },
+});

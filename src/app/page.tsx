@@ -1,19 +1,21 @@
 import { PageWrapper } from "@/components/PageWrapper";
 import { BlogList } from "@/components/blog/BlogList";
-import { listPosts } from "@/lib/posts";
+import { listPublishedPosts } from "@/lib/posts";
 
 export default async function Home() {
-  const posts = await listPosts();
+  const posts = await listPublishedPosts();
 
   return (
-    <PageWrapper className="flex flex-col flex-1 h-full">
+    <PageWrapper className="flex h-full flex-1 flex-col">
       <header className="mb-16 mt-8">
-        <h1 className="text-xl text-neutral-200 font-medium tracking-tight mb-2">qanx._.minhhh blog</h1>
-        <p className="text-neutral-500 text-[13px] tracking-[0.15em] font-light italic mt-2 opacity-75">
+        <h1 className="mb-2 text-xl font-medium tracking-tight text-neutral-200">
+          qanx._.minhhh blog
+        </h1>
+        <p className="mt-2 text-[13px] font-light italic tracking-[0.15em] text-neutral-500 opacity-75">
           &ldquo;just raw !&rdquo;
         </p>
       </header>
-      
+
       <BlogList posts={posts} />
     </PageWrapper>
   );

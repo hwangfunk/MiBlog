@@ -1,16 +1,16 @@
-import { BlogItem } from "./BlogItem";
-import { BlogPostSummary } from "@/types/blog";
-import { FadeInStagger, FadeInStaggerItem } from "../animations/FadeInStagger";
+import { FadeInStagger, FadeInStaggerItem } from "@/components/animations/FadeInStagger";
+import { BlogItem } from "@/components/blog/BlogItem";
+import type { PostSummary } from "@/types/blog";
 
 interface BlogListProps {
-  posts: BlogPostSummary[];
+  posts: PostSummary[];
 }
 
 export const BlogList = ({ posts }: BlogListProps) => {
   return (
-    <FadeInStagger className="flex flex-col gap-2 flex-1 relative">
+    <FadeInStagger className="relative flex flex-1 flex-col gap-2">
       {posts.map((post) => (
-        <FadeInStaggerItem key={post.slug}>
+        <FadeInStaggerItem key={post.id}>
           <BlogItem post={post} />
         </FadeInStaggerItem>
       ))}

@@ -1,77 +1,94 @@
 import "server-only";
-import { SignJWT, jwtVerify } from "jose";
+
+import { timingSafeEqual } from "node:crypto";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
+import {
+  ADMIN_SESSION_COOKIE_NAME,
+  ADMIN_SESSION_MAX_AGE_SECONDS,
+  type AdminSessionPayload,
+  signAdminSessionToken,
+  verifyAdminSessionToken,
+} from "@/lib/session-token";
 
-const secretKey = process.env.SESSION_SECRET;
-if (!secretKey) {
-  throw new Error("SESSION_SECRET environment variable is not set");
-}
-const encodedKey = new TextEncoder().encode(secretKey);
+function getRequiredAdminPassword() {
+  const adminPassword = process.env.ADMIN_PASSWORD;
 
-const COOKIE_NAME = "admin-session";
-const SESSION_DURATION = 7 * 24 * 60 * 60 * 1000; // 7 days
-
-export async function encrypt(payload: { isAdmin: boolean; expiresAt: Date }) {
-  return new SignJWT({ ...payload, expiresAt: payload.expiresAt.toISOString() })
-    .setProtectedHeader({ alg: "HS256" })
-    .setIssuedAt()
-    .setExpirationTime("7d")
-    .sign(encodedKey);
-}
-
-export async function decrypt(session: string | undefined = "") {
-  try {
-    const { payload } = await jwtVerify(session, encodedKey, {
-      algorithms: ["HS256"],
-    });
-    return payload as { isAdmin: boolean; expiresAt: string };
-  } catch {
-    return null;
+  if (!adminPassword) {
+    throw new Error("ADMIN_PASSWORD environment variable is not set");
   }
+
+  return adminPassword;
 }
 
-export async function createSession() {
-  const expiresAt = new Date(Date.now() + SESSION_DURATION);
-  const session = await encrypt({ isAdmin: true, expiresAt });
+function getSafeRedirectTarget(fromPath: string) {
+  if (fromPath.startsWith("/") && !fromPath.startsWith("//")) {
+    return fromPath;
+  }
+
+  return "/admin";
+}
+
+export async function getAdminSessionOrNull(): Promise<AdminSessionPayload | null> {
+  const cookieStore = await cookies();
+  const token = cookieStore.get(ADMIN_SESSION_COOKIE_NAME)?.value;
+
+  return verifyAdminSessionToken(token);
+}
+
+export async function createAdminSession() {
+  const token = await signAdminSessionToken();
   const cookieStore = await cookies();
 
-  cookieStore.set(COOKIE_NAME, session, {
+  cookieStore.set(ADMIN_SESSION_COOKIE_NAME, token, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
-    expires: expiresAt,
     sameSite: "lax",
     path: "/",
+    maxAge: ADMIN_SESSION_MAX_AGE_SECONDS,
   });
 }
 
-export async function deleteSession() {
+export async function clearAdminSession() {
   const cookieStore = await cookies();
-  cookieStore.delete(COOKIE_NAME);
+  cookieStore.delete(ADMIN_SESSION_COOKIE_NAME);
 }
 
-export async function verifySession() {
-  const cookieStore = await cookies();
-  const session = cookieStore.get(COOKIE_NAME)?.value;
+export async function requireAdminPageSession(fromPath = "/admin") {
+  const session = await getAdminSessionOrNull();
 
-  if (!session) return null;
-
-  const payload = await decrypt(session);
-  if (!payload) return null;
-
-  // Check expiration
-  if (new Date(payload.expiresAt) < new Date()) {
-    await deleteSession();
-    return null;
+  if (!session) {
+    redirect(`/admin/login?from=${encodeURIComponent(getSafeRedirectTarget(fromPath))}`);
   }
 
-  return payload;
+  return session;
 }
 
-export async function verifyPassword(password: string): Promise<boolean> {
-  const adminPassword = process.env.ADMIN_PASSWORD;
-  if (!adminPassword) {
-    console.error("ADMIN_PASSWORD environment variable is not set");
+export async function requireAdminMutationSession() {
+  const session = await getAdminSessionOrNull();
+
+  if (!session) {
+    return {
+      ok: false as const,
+      status: 401,
+      error: "Unauthorized",
+    };
+  }
+
+  return {
+    ok: true as const,
+    session,
+  };
+}
+
+export async function verifyAdminPassword(password: string) {
+  const expectedPassword = getRequiredAdminPassword();
+  const provided = Buffer.from(password);
+  const expected = Buffer.from(expectedPassword);
+
+  if (provided.length !== expected.length) {
     return false;
   }
-  return password === adminPassword;
+
+  return timingSafeEqual(provided, expected);
 }

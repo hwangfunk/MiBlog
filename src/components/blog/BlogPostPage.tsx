@@ -1,48 +1,66 @@
 import Link from "next/link";
-import { PageWrapper } from "@/components/PageWrapper";
-import { AdminAura } from "@/components/admin/AdminAura";
 import { FadeInStagger, FadeInStaggerItem } from "@/components/animations/FadeInStagger";
-import { sanitizeHtml } from "@/lib/sanitize";
-import { BlogPost } from "@/types/blog";
+import { AdminAura } from "@/components/admin/AdminAura";
+import { PageWrapper } from "@/components/PageWrapper";
+import { formatPublishedDate } from "@/lib/dates";
+import { sanitizeHtmlForRender } from "@/lib/sanitize-server";
+import type { PostDetail } from "@/types/blog";
 
 interface BlogPostPageProps {
-  post: BlogPost;
+  post: PostDetail;
   backHref: string;
   backLabel: string;
   adminLabel?: string;
+  notice?: string;
 }
 
-export function BlogPostPage({
+export async function BlogPostPage({
   post,
   backHref,
   backLabel,
   adminLabel,
+  notice,
 }: BlogPostPageProps) {
+  const sanitizedHtml = await sanitizeHtmlForRender(post.contentHtml);
+
   return (
     <>
       {adminLabel ? <AdminAura label={adminLabel} /> : null}
-      <PageWrapper className="flex flex-col flex-1">
-        <FadeInStagger className="flex-1 mt-8 md:mt-16">
-          <FadeInStaggerItem className="mb-12 border-b border-neutral-900 pb-8">
-            <h1 className="text-2xl md:text-3xl font-medium text-neutral-200 mb-4 tracking-tight">
+      <PageWrapper className="flex flex-1 flex-col">
+        <FadeInStagger className="mt-8 flex-1 md:mt-16">
+          {notice ? (
+            <FadeInStaggerItem className="mb-8 blog-content-shell">
+              <div className="rounded-2xl border border-cyan-500/20 bg-cyan-500/5 px-4 py-3 text-sm text-cyan-100/80">
+                {notice}
+              </div>
+            </FadeInStaggerItem>
+          ) : null}
+
+          <FadeInStaggerItem className="blog-content-shell mb-12 border-b border-neutral-900 pb-8">
+            <h1 className="mb-4 text-2xl font-medium tracking-tight text-neutral-200 md:text-3xl">
               {post.title}
             </h1>
-            <time className="text-neutral-500 font-mono text-sm">
-              {post.date}
-            </time>
+            <div className="flex flex-wrap items-center gap-3 text-sm font-mono text-neutral-500">
+              <time>{formatPublishedDate(post.publishedAt)}</time>
+              {adminLabel ? (
+                <span className="rounded-full border border-neutral-800 px-2 py-1 text-[11px] uppercase tracking-[0.16em] text-neutral-400">
+                  {post.status}
+                </span>
+              ) : null}
+            </div>
           </FadeInStaggerItem>
 
-          <FadeInStaggerItem className="space-y-6 text-neutral-400 leading-relaxed text-sm md:text-base prose prose-invert max-w-none">
-            <div dangerouslySetInnerHTML={{ __html: sanitizeHtml(post.content || "") }} />
+          <FadeInStaggerItem className="blog-content-shell text-sm leading-relaxed text-neutral-400 md:text-base">
+            <div className="blog-rich-text" dangerouslySetInnerHTML={{ __html: sanitizedHtml }} />
           </FadeInStaggerItem>
 
-          <FadeInStaggerItem className="mt-16 pb-8">
+          <FadeInStaggerItem className="blog-content-shell mt-16 pb-8">
             <Link
               href={backHref}
-              className="text-neutral-500 hover:text-neutral-300 transition-colors inline-block"
+              className="inline-block text-neutral-500 transition-colors hover:text-neutral-300"
             >
               &larr;{" "}
-              <span className="ml-1 border-b border-transparent hover:border-neutral-500 pb-0.5 transition-colors">
+              <span className="ml-1 border-b border-transparent pb-0.5 transition-colors hover:border-neutral-500">
                 {backLabel}
               </span>
             </Link>

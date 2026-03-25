@@ -1,7 +1,8 @@
 import { Suspense } from "react";
+import Link from "next/link";
 import { notFound } from "next/navigation";
-import { connection } from "next/server";
-import { getPostBySlug } from "@/lib/posts";
+import { getAdminPostBySlug } from "@/lib/posts";
+import { requireAdminPageSession } from "@/lib/session";
 import PostEditor from "../../components/PostEditor";
 
 function EditPostPageFallback() {
@@ -21,19 +22,30 @@ function EditPostPageFallback() {
   );
 }
 
-async function EditPostContent({ slug }: { slug: string }) {
-  await connection();
-  const post = await getPostBySlug(slug);
+async function EditPostPageContent({ slug }: { slug: string }) {
+  await requireAdminPageSession(`/admin/edit/${slug}`);
+  const post = await getAdminPostBySlug(slug);
 
   if (!post) {
     notFound();
   }
 
   return (
-    <div className="flex flex-col gap-10">
-      <div>
-        <h2 className="text-lg text-neutral-200 font-medium tracking-tight">Edit Post</h2>
-        <p className="text-neutral-500 text-sm mt-1 font-mono">/{post.slug}</p>
+    <div className="flex flex-col gap-8">
+      <div className="border-b border-neutral-800/50 pb-5">
+        <Link
+          href="/admin"
+          prefetch={false}
+          className="text-[11px] uppercase tracking-[0.2em] text-neutral-500 transition-colors hover:text-neutral-300"
+        >
+          Posts
+        </Link>
+        <div className="mt-3 flex flex-wrap items-center gap-3">
+          <h2 className="text-2xl font-medium tracking-tight text-neutral-100">Edit post</h2>
+          <p className="rounded-full border border-neutral-800/80 px-3 py-1 text-xs font-mono text-neutral-500">
+            /{post.slug}
+          </p>
+        </div>
       </div>
       <PostEditor post={post} />
     </div>
@@ -47,9 +59,7 @@ export default function EditPostPage({
 }) {
   return (
     <Suspense fallback={<EditPostPageFallback />}>
-      {params.then(({ slug }) => (
-        <EditPostContent slug={slug} />
-      ))}
+      {params.then(({ slug }) => <EditPostPageContent slug={slug} />)}
     </Suspense>
   );
 }
