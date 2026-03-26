@@ -23,7 +23,8 @@
       "mcp__plugin_supabase_supabase__execute_sql",
       "mcp__plugin_supabase_supabase__search_docs",
       "Bash(find /Users/quangminh/Home/Typescript/Websites/MiBlog/node_modules/next/dist/docs/01-app -name *route*)",
-      "Bash(/Users/quangminh/.claude/plugins/cache/claude-plugins-official/superpowers/5.0.5/skills/brainstorming/scripts/start-server.sh --project-dir /Users/quangminh/Home/Typescript/Websites/MiBlog)"
+      "Bash(/Users/quangminh/.claude/plugins/cache/claude-plugins-official/superpowers/5.0.5/skills/brainstorming/scripts/start-server.sh --project-dir /Users/quangminh/Home/Typescript/Websites/MiBlog)",
+      "Bash(pnpm test:*)"
     ]
   },
   "enabledPlugins": {

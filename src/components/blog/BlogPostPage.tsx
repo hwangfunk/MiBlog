@@ -14,14 +14,14 @@ interface BlogPostPageProps {
   notice?: string;
 }
 
-export async function BlogPostPage({
+export function BlogPostPage({
   post,
   backHref,
   backLabel,
   adminLabel,
   notice,
 }: BlogPostPageProps) {
-  const sanitizedHtml = await sanitizeHtmlForRender(post.contentHtml);
+  const sanitizedHtml = sanitizeHtmlForRender(post.contentHtml);
 
   return (
     <>

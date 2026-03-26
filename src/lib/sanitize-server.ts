@@ -2,14 +2,10 @@ import "server-only";
 
 import { htmlToPlainText, sanitizeHtml } from "@/lib/sanitize";
 
-export async function sanitizeHtmlForRender(html: string) {
-  "use cache";
-
+export function sanitizeHtmlForRender(html: string) {
   return sanitizeHtml(html);
 }
 
-export async function htmlToPlainTextForMetadata(html: string, maxLength = 160) {
-  "use cache";
-
+export function htmlToPlainTextForMetadata(html: string, maxLength = 160) {
   return htmlToPlainText(html, maxLength);
 }

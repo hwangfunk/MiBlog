@@ -16,7 +16,7 @@ export async function generateMetadata({
     return { title: "Post not found" };
   }
 
-  const description = await htmlToPlainTextForMetadata(post.contentHtml);
+  const description = htmlToPlainTextForMetadata(post.contentHtml);
 
   return {
     title: `${post.title} | qanx._.minhhh blog`,
