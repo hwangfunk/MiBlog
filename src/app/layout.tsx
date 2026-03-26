@@ -2,6 +2,16 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { Footer } from "@/components/layout/Footer";
+import {
+  DEFAULT_OG_IMAGE_PATH,
+  SITE_AUTHOR_NAME,
+  SITE_BRAND_NAME,
+  SITE_DESCRIPTION,
+  SITE_OG_LOCALE,
+  createMetadataImage,
+  getDefaultRobotsMetadata,
+  getSiteUrl,
+} from "@/lib/seo";
 
 const jetbrainsMono = localFont({
   variable: "--font-jetbrains",
@@ -17,8 +27,33 @@ const jetbrainsMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "qanx._.minhhh blog",
-  description: "\"just raw !\"",
+  metadataBase: getSiteUrl(),
+  title: {
+    default: SITE_BRAND_NAME,
+    template: `%s | ${SITE_BRAND_NAME}`,
+  },
+  description: SITE_DESCRIPTION,
+  applicationName: SITE_BRAND_NAME,
+  authors: [{ name: SITE_AUTHOR_NAME, url: getSiteUrl() }],
+  creator: SITE_AUTHOR_NAME,
+  publisher: SITE_AUTHOR_NAME,
+  robots: getDefaultRobotsMetadata(),
+  openGraph: {
+    type: "website",
+    url: "/",
+    title: SITE_BRAND_NAME,
+    description: SITE_DESCRIPTION,
+    siteName: SITE_BRAND_NAME,
+    locale: SITE_OG_LOCALE,
+    images: [createMetadataImage(DEFAULT_OG_IMAGE_PATH, SITE_BRAND_NAME)],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_BRAND_NAME,
+    description: SITE_DESCRIPTION,
+    creator: SITE_AUTHOR_NAME,
+    images: [createMetadataImage(DEFAULT_OG_IMAGE_PATH, SITE_BRAND_NAME)],
+  },
 };
 
 export default function RootLayout({

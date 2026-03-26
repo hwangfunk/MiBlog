@@ -3,6 +3,7 @@
 ## Required environment variables
 - `SESSION_SECRET`
 - `ADMIN_PASSWORD`
+- `SITE_URL`
 - `NEXT_PUBLIC_SUPABASE_URL`
 - `SUPABASE_SERVICE_ROLE_KEY`
 

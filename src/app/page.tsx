@@ -1,6 +1,17 @@
+import type { Metadata } from "next";
 import { PageWrapper } from "@/components/PageWrapper";
 import { BlogList } from "@/components/blog/BlogList";
 import { listPublishedPosts } from "@/lib/posts";
+import { SITE_BRAND_NAME } from "@/lib/seo";
+
+export const metadata: Metadata = {
+  title: {
+    absolute: SITE_BRAND_NAME,
+  },
+  alternates: {
+    canonical: "/",
+  },
+};
 
 export default async function Home() {
   const posts = await listPublishedPosts();

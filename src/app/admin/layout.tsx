@@ -4,7 +4,12 @@ import { connection } from "next/server";
 import { PageWrapper } from "@/components/PageWrapper";
 import { AdminAura } from "@/components/admin/AdminAura";
 import { getAdminSessionOrNull } from "@/lib/session";
+import { NO_INDEX_ROBOTS } from "@/lib/seo";
 import { LogoutButton } from "./components/LogoutButton";
+
+export const metadata = {
+  robots: NO_INDEX_ROBOTS,
+};
 
 function AdminLayoutFallback() {
   return (

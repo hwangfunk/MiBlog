@@ -4,6 +4,11 @@ import { connection } from "next/server";
 import { BlogPostPage } from "@/components/blog/BlogPostPage";
 import { getAdminPostBySlug } from "@/lib/posts";
 import { requireAdminPageSession } from "@/lib/session";
+import { NO_INDEX_ROBOTS } from "@/lib/seo";
+
+export const metadata = {
+  robots: NO_INDEX_ROBOTS,
+};
 
 function AdminPreviewFallback() {
   return (
